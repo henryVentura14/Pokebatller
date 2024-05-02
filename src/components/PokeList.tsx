@@ -1,17 +1,29 @@
 import React, { useState } from 'react';
-import { usePokemonContext } from '../context/PokeContext';
+import { usePokeContext } from '../context/PokeContext';
 import PokeCard from './PokeCard';
 import PokeDialog from './PokeDialog';
+import { PokeData } from '../types/Pokedata';
 
 const PokemonList: React.FC = () => {
-    const { pokemonData, loading, error } = usePokemonContext();
-    const [selectedPokemon, setSelectedPokemon] = useState<any>(null);
+    const { pokemonData, loading, error } = usePokeContext();
+    const [detailsPokemon, setDetailsPokemon] = useState<PokeData | null>(null);
     const [isOpen, setIsOpen] = useState<boolean>(false);
-
 
     const handlePokemonClick = (pokemon: any) => {
         setIsOpen(true);
-        setSelectedPokemon(pokemon);
+        fetchPokeDetails(pokemon.url).then((data) => {
+            setDetailsPokemon(data);
+        });
+    };
+
+    const fetchPokeDetails = async (url: string) => {
+        try {
+            const res = await fetch(url);
+            const data = await res.json();
+            return data;
+        } catch (error) {
+            console.error(error);
+        }
     };
 
     if (loading) {
@@ -37,7 +49,7 @@ const PokemonList: React.FC = () => {
                     ))}
                 </div>
             </div>
-            {selectedPokemon && <PokeDialog pokemon={selectedPokemon} onClose={() => setSelectedPokemon(null)} isOpen={isOpen} />}
+            {detailsPokemon && <PokeDialog pokemon={detailsPokemon} onClose={() => setDetailsPokemon(null)} isOpen={isOpen} />}
         </div>
     );
 };

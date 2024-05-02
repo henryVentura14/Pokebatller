@@ -1,12 +1,6 @@
-// PokeContext.tsx
 import React, { createContext, useContext, useState, useEffect } from 'react';
+import { PokeContextType, PokeData } from '../types/Pokedata';
 import axios from 'axios';
-
-interface PokeContextType {
-    pokemonData: any[] | null;
-    loading: boolean;
-    error: string | null;
-}
 
 const PokeContext = createContext<PokeContextType>({
     pokemonData: null,
@@ -14,10 +8,10 @@ const PokeContext = createContext<PokeContextType>({
     error: null,
 });
 
-export const usePokemonContext = () => useContext(PokeContext);
+export const usePokeContext = () => useContext(PokeContext);
 
 export const PokeProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-    const [pokemonData, setPokemonData] = useState<any[] | null>(null);
+    const [pokemonData, setPokemonData] = useState<PokeData[] | null>(null);
     const [loading, setLoading] = useState<boolean>(false);
     const [error, setError] = useState<string | null>(null);
 
@@ -25,8 +19,8 @@ export const PokeProvider: React.FC<{ children: React.ReactNode }> = ({ children
         const fetchPokemonData = async () => {
             setLoading(true);
             try {
-                const response = await axios.get('https://pokeapi.co/api/v2/pokemon?limit=20');
-                setPokemonData(response.data.results);
+                const res = await axios.get('https://pokeapi.co/api/v2/pokemon?limit=18');
+                setPokemonData(res.data.results);
             } catch (error: any) {
                 setError(error.message);
             }
