@@ -2,6 +2,7 @@ export interface PokeContextType {
   pokemonData: PokeData[] | null;
   loading: boolean;
   error: string | null;
+  searchPokemon: (query: string) => void;
 }
 
 export interface PokeData {
