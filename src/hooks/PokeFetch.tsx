@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
-import axios from '../config/AxiosConfig';
+import axiosInstance from '../config/AxiosConfig';
 
-function useFetch(endpoint: string) {
+function PokeFetch(endpoint: string) {
     const [data, setData] = useState<any>(null);
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
@@ -10,8 +10,8 @@ function useFetch(endpoint: string) {
         const fetchData = async () => {
             try {
                 setLoading(true);
-                const response = await axios.get(endpoint);
-                setData(response.data);
+                const response = await axiosInstance.get(endpoint);
+                setData(response.data.results);
                 setError(null);
             } catch (error) {
                 setError('Error fetching data from PokeAPI');
@@ -25,4 +25,4 @@ function useFetch(endpoint: string) {
     return { data, loading, error };
 }
 
-export default useFetch;
+export default PokeFetch;
