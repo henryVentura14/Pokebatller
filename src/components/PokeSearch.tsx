@@ -10,12 +10,12 @@ const PokeSearch: React.FC = () => {
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;
     setSearchQuery(value);
-    searchPokemon(value); // Llama a la función de búsqueda mientras el usuario escribe
+    searchPokemon(value);
   };
 
   const handleClearSearch = () => {
     setSearchQuery("");
-    searchPokemon(""); // Restablece la búsqueda cuando se hace clic en el botón de cierre
+    searchPokemon("");
   };
 
   return (
