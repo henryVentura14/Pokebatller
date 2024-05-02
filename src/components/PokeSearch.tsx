@@ -1,7 +1,6 @@
-// PokeSearch.tsx
 import React, { useState } from "react";
 import { usePokeContext } from "../context/PokeContext";
-import { X } from "react-feather"; // Importa el icono de cierre
+import { X } from "react-feather";
 
 const PokeSearch: React.FC = () => {
   const { searchPokemon } = usePokeContext();
@@ -28,7 +27,7 @@ const PokeSearch: React.FC = () => {
         className="flex-1 bg-gray-800 text-white rounded-md py-2 px-3 focus:outline-none"
       />
       {searchQuery && (
-        <button title="Clear search" onClick={handleClearSearch} className="ml-2 focus:outline-none">
+        <button type="button" title="Clear search" onClick={handleClearSearch} className="ml-2 focus:outline-none">
           <X className="h-5 w-5 text-white" />
         </button>
       )}

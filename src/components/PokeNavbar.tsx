@@ -1,4 +1,3 @@
-// PokeNavbar.tsx
 import React, { useState } from "react";
 import { Menu, Search } from "react-feather";
 import PokeSearch from "./PokeSearch";
@@ -30,7 +29,7 @@ export default function PokeNavbar() {
   const [openSearch, setOpenSearch] = useState(false);
 
   return (
-    <nav className="bg-gray-800">
+    <nav className="bg-gray-800 fixed w-full top-0 left-0 z-50">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="relative flex items-center justify-between h-16">
           <div className="flex items-center flex-1 justify-between sm:justify-start">

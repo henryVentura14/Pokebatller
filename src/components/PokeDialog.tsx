@@ -22,7 +22,7 @@ const PokeDialog: React.FC<PokeDialogProps> = ({ isOpen, pokemon, onClose }) => 
               className="w-full h-full object-center object-cover group-hover:opacity-75"
             />
           </div>
-          <h2 className="text-2xl font-bold text-gray-900">{pokemon.name}</h2>
+          <h2 className="text-2xl font-bold text-gray-900 capitalize">{pokemon.name}</h2>
           <div className="mt-4">
             <h3 className="text-lg font-semibold">Abilities:</h3>
             <ul className="list-disc list-inside">

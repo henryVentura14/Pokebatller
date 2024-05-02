@@ -1,4 +1,3 @@
-// PokeContext.tsx
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { PokeContextType, PokeData } from '../types/Pokedata';
 import axios from 'axios';
@@ -36,7 +35,7 @@ export const PokeProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
     const searchPokemon = (query: string) => {
         if (!query) {
-            setFilteredData(pokemonData); // Restablecer resultados si la búsqueda está vacía
+            setFilteredData(pokemonData);
             return;
         }
         const filtered = pokemonData?.filter((pokemon) => pokemon.name.toLowerCase().includes(query.toLowerCase()));

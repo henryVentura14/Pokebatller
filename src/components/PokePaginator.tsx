@@ -1,4 +1,3 @@
-// Paginator.tsx
 import React from 'react';
 
 interface PaginatorProps {
