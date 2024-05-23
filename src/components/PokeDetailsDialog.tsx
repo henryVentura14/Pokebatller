@@ -1,16 +1,18 @@
 import React from "react";
 import { PokeData } from "../types/Pokedata";
 
-interface PokeDialogProps {
+interface PokeDetailsProps {
   pokemon: PokeData | null;
   isOpen: boolean;
+  isSelected: boolean;
+  isReady: boolean;
   onClose: () => void;
   onSelect: () => void;
-  isSelected: boolean;
 }
 
-const PokeDialog: React.FC<PokeDialogProps> = ({ isOpen, pokemon, onClose, onSelect, isSelected }) => {
+const PokeDetailsDialog: React.FC<PokeDetailsProps> = ({ isOpen, pokemon, onClose, onSelect, isSelected, isReady }) => {
   if (!pokemon || !isOpen) return null;
+  const showButtonSelect = !isReady || isSelected;
 
   return (
     <div className="fixed inset-0 overflow-y-auto z-50 bg-gray-800 bg-opacity-50 flex justify-center items-center">
@@ -51,10 +53,22 @@ const PokeDialog: React.FC<PokeDialogProps> = ({ isOpen, pokemon, onClose, onSel
           </ul>
         </div>
         <div className="mt-6 flex justify-between">
-          <button className={` text-white font-bold py-2 px-4 rounded ${isSelected? 'bg-red-500 hover:bg-red-600' : 'bg-green-500 hover:bg-green-600'}`} onClick={onSelect}>
-            {isSelected ? 'Deselect' : 'Select'}
-          </button>
-          <button className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded" onClick={onClose}>
+          {showButtonSelect && (
+            <button
+              type="button"
+              className={` text-white font-bold py-2 px-4 rounded ${
+                isSelected ? "bg-red-500 hover:bg-red-600" : "bg-green-500 hover:bg-green-600"
+              }`}
+              onClick={onSelect}
+            >
+              {isSelected ? "Deselect" : "Select"}
+            </button>
+          )}
+          <button
+            type="button"
+            className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded"
+            onClick={onClose}
+          >
             Close
           </button>
         </div>
@@ -63,4 +77,4 @@ const PokeDialog: React.FC<PokeDialogProps> = ({ isOpen, pokemon, onClose, onSel
   );
 };
 
-export default PokeDialog;
+export default PokeDetailsDialog;

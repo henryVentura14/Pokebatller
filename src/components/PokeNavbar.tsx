@@ -1,23 +1,27 @@
 import React, { useState } from "react";
 import { Menu, Search } from "react-feather";
 import PokeSearch from "./PokeSearch";
+import { Link } from "react-router-dom";
 
-const menuItems = [{ label: "Pokedex" }, { label: "Battle" }];
+const menuItems = [
+  { label: "Pokedex", path: "/" },
+  { label: "Battle", path: "/battle" },
+];
 
 function MobileMenu() {
   return (
     <div className="sm:hidden" id="mobile-menu">
       <div className="space-y-1 px-2 pb-3 pt-2">
         {menuItems.map((item, index) => (
-          <button
+          <Link
             key={index}
-            type="button"
+            to={item.path}
             className={`${
               index === 0 ? "bg-gray-900 text-white" : "text-gray-300 hover:bg-gray-700 hover:text-white"
             } block rounded-md px-3 py-2 text-base font-medium`}
           >
             {item.label}
-          </button>
+          </Link>
         ))}
       </div>
     </div>
@@ -39,16 +43,16 @@ export default function PokeNavbar() {
             <div className="hidden sm:block sm:ml-6">
               <div className="flex space-x-4">
                 {menuItems.map((item, index) => (
-                  <button
+                  <Link
                     key={index}
-                    type="button"
+                    to={item.path}
                     className={`${
                       index === 0 ? "bg-gray-900 text-white" : "text-gray-300 hover:bg-gray-700 hover:text-white"
                     } rounded-md px-3 py-2 text-sm font-medium`}
                     aria-current="page"
                   >
                     {item.label}
-                  </button>
+                  </Link>
                 ))}
               </div>
             </div>
