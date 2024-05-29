@@ -55,7 +55,7 @@ const PokemonList: React.FC = () => {
   };
 
   const handleStartBattle = () => {
-    console.log("Iniciar batalla con:", selectedPokemon);
+    console.log("Start battle with:", selectedPokemon);
     navigate("/battle");
   };
 
