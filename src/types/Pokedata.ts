@@ -2,6 +2,10 @@ export interface PokeContextType {
   pokemonData: PokeData[] | null;
   loading: boolean;
   error: string | null;
+  selectedPokemon: PokeData[];
+  searchPokemon: (query: string) => void;
+  addSelectedPokemon: (pokemon: PokeData) => void;
+  removeSelectedPokemon: (pokemon: PokeData) => void;
 }
 
 export interface PokeData {
