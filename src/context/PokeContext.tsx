@@ -23,7 +23,10 @@ export const PokeProvider: React.FC<PokeProviderProps> = ({ children }) => {
     const [filteredData, setFilteredData] = useState<PokeData[] | null>(null);
     const [loading, setLoading] = useState<boolean>(false);
     const [error, setError] = useState<string | null>(null);
-    const [selectedPokemon, setSelectedPokemon] = useState<PokeData[]>([]);
+    const [selectedPokemon, setSelectedPokemon] = useState<PokeData[]>(() => {
+        const saved = localStorage.getItem('selectedPokemon');
+        return saved ? JSON.parse(saved) : [];
+    });
 
     useEffect(() => {
         const fetchPokemonData = async () => {
@@ -40,6 +43,10 @@ export const PokeProvider: React.FC<PokeProviderProps> = ({ children }) => {
 
         fetchPokemonData();
     }, []);
+
+    useEffect(() => {
+        localStorage.setItem('selectedPokemon', JSON.stringify(selectedPokemon));
+    }, [selectedPokemon]);
 
     const searchPokemon = (query: string) => {
         if (!query) {

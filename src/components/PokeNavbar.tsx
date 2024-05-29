@@ -1,36 +1,52 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, FC } from "react";
 import { Menu, Search } from "react-feather";
 import PokeSearch from "./PokeSearch";
 import { Link } from "react-router-dom";
+import { usePokeContext } from "../context/PokeContext";
 
-const menuItems = [
-  { label: "Pokedex", path: "/" },
-  { label: "Battle", path: "/battle" },
-];
-
-function MobileMenu() {
-  return (
-    <div className="sm:hidden" id="mobile-menu">
-      <div className="space-y-1 px-2 pb-3 pt-2">
-        {menuItems.map((item, index) => (
-          <Link
-            key={index}
-            to={item.path}
-            className={`${
-              index === 0 ? "bg-gray-900 text-white" : "text-gray-300 hover:bg-gray-700 hover:text-white"
-            } block rounded-md px-3 py-2 text-base font-medium`}
-          >
-            {item.label}
-          </Link>
-        ))}
-      </div>
-    </div>
-  );
+interface MenuItem {
+  label: string;
+  path: string;
 }
 
-export default function PokeNavbar() {
+interface MobileMenuProps {
+  menuItems: MenuItem[];
+}
+
+const getMenuItems = (selectedPokemon: any[]): MenuItem[] => {
+  return [
+    { label: "Pokedex", path: "/" },
+    { label: "Battle", path: selectedPokemon.length === 3 ? "/battle" : "/" },
+  ];
+};
+
+const MobileMenu: FC<MobileMenuProps> = ({ menuItems }) => (
+  <div className="sm:hidden" id="mobile-menu">
+    <div className="space-y-1 px-2 pb-3 pt-2">
+      {menuItems.map((item, index) => (
+        <Link
+          key={index}
+          to={item.path}
+          className={`${
+            index === 0 ? "bg-gray-900 text-white" : "text-gray-300 hover:bg-gray-700 hover:text-white"
+          } block rounded-md px-3 py-2 text-base font-medium`}
+        >
+          {item.label}
+        </Link>
+      ))}
+    </div>
+  </div>
+);
+
+const PokeNavbar: FC = () => {
   const [openMobileMenu, setOpenMobileMenu] = useState(false);
   const [openSearch, setOpenSearch] = useState(false);
+  const { selectedPokemon } = usePokeContext();
+  const [menuItems, setMenuItems] = useState<MenuItem[]>(getMenuItems(selectedPokemon));
+
+  useEffect(() => {
+    setMenuItems(getMenuItems(selectedPokemon));
+  }, [selectedPokemon]);
 
   return (
     <nav className="bg-gray-800 fixed w-full top-0 left-0 z-50">
@@ -78,8 +94,10 @@ export default function PokeNavbar() {
           </div>
         </div>
       </div>
-      {openMobileMenu && <MobileMenu />}
+      {openMobileMenu && <MobileMenu menuItems={menuItems} />}
       {openSearch && <PokeSearch />}
     </nav>
   );
 }
+
+export default PokeNavbar;

@@ -17,11 +17,11 @@ const PokeDetailsDialog: React.FC<PokeDetailsProps> = ({ isOpen, pokemon, onClos
   return (
     <div className="fixed inset-0 overflow-y-auto z-50 bg-gray-800 bg-opacity-50 flex justify-center items-center">
       <div className="bg-white rounded-lg p-8 w-full max-w-xl">
-        <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md lg:aspect-none group-hover:opacity-75 lg:h-80">
+        <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md lg:aspect-none group-hover:opacity-75 lg:h-60">
           <img
             src={pokemon.sprites.front_default}
             alt={pokemon.name}
-            className="w-full h-full object-center object-cover group-hover:opacity-75"
+            className="w-full h-80 object-scale group-hover:opacity-80"
           />
         </div>
         <h2 className="text-2xl font-bold text-gray-900 capitalize">{pokemon.name}</h2>

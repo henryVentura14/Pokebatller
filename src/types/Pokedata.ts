@@ -8,6 +8,11 @@ export interface PokeContextType {
   removeSelectedPokemon: (pokemon: PokeData) => void;
 }
 
+export interface MenuItem {
+  label: string;
+  path: string;
+}
+
 export interface PokeData {
     abilities: Ability[]
     base_experience: number
