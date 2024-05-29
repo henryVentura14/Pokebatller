@@ -1,4 +1,3 @@
-// PokeContext.tsx
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { PokeContextType, PokeData } from '../types/Pokedata';
 import axios from 'axios';
