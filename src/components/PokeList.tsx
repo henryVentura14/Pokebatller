@@ -8,8 +8,6 @@ import PokeDetailsDialog from "./PokeDetailsDialog";
 import PokeBattleDialog from "./PokeBattleDialog";
 import PokeBox from "./PokeBox";
 
-import { Trash } from "react-feather";
-
 
 const PokemonList: React.FC = () => {
   const navigate = useNavigate();
