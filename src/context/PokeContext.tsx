@@ -14,9 +14,16 @@ const PokeContext = createContext<PokeContextType>({
     searchPokemon: () => {},
     addSelectedPokemon: () => {},
     removeSelectedPokemon: () => {},
+    generateRandomList: () => {},
+    clearSelectedPokemon: () => {},
 });
 
 export const usePokeContext = () => useContext(PokeContext);
+
+const getRandomElements = (arr: PokeData[], count: number) => {
+    const shuffled = [...arr].sort(() => 0.5 - Math.random());
+    return shuffled.slice(0, count);
+};
 
 export const PokeProvider: React.FC<PokeProviderProps> = ({ children }) => {
     const [pokemonData, setPokemonData] = useState<PokeData[] | null>(null);
@@ -32,7 +39,7 @@ export const PokeProvider: React.FC<PokeProviderProps> = ({ children }) => {
         const fetchPokemonData = async () => {
             setLoading(true);
             try {
-                const res = await axios.get('https://pokeapi.co/api/v2/pokemon?limit=100000&offset=0');
+                const res = await axios.get('https://pokeapi.co/api/v2/pokemon?limit=1000&offset=0');
                 setPokemonData(res.data.results);
                 setFilteredData(res.data.results);
             } catch (error: any) {
@@ -65,6 +72,17 @@ export const PokeProvider: React.FC<PokeProviderProps> = ({ children }) => {
         setSelectedPokemon(prevSelectedPokemon => prevSelectedPokemon.filter(p => p.name !== pokemon.name));
     };
 
+    const generateRandomList = () => {
+        if (pokemonData) {
+            setFilteredData(getRandomElements(pokemonData, 50)); // Número de Pokémon aleatorios
+        }
+    };
+
+    
+    const clearSelectedPokemon = () => {
+        setSelectedPokemon([]);
+    };
+
     return (
         <PokeContext.Provider value={{ 
             pokemonData: filteredData, 
@@ -73,7 +91,9 @@ export const PokeProvider: React.FC<PokeProviderProps> = ({ children }) => {
             error, 
             searchPokemon, 
             addSelectedPokemon, 
-            removeSelectedPokemon 
+            removeSelectedPokemon, 
+            generateRandomList,
+            clearSelectedPokemon
         }}>
             {children}
         </PokeContext.Provider>
