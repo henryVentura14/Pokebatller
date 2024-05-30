@@ -1,7 +1,7 @@
 import React, { useState, useEffect, FC } from "react";
 import { Menu, Search } from "react-feather";
 import PokeSearch from "./PokeSearch";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { usePokeContext } from "../context/PokeContext";
 
 interface MenuItem {
@@ -39,6 +39,8 @@ const MobileMenu: FC<MobileMenuProps> = ({ menuItems }) => (
 );
 
 const PokeNavbar: FC = () => {
+  const navigate = useNavigate();
+
   const [openMobileMenu, setOpenMobileMenu] = useState(false);
   const [openSearch, setOpenSearch] = useState(false);
   const { selectedPokemon } = usePokeContext();
@@ -48,12 +50,16 @@ const PokeNavbar: FC = () => {
     setMenuItems(getMenuItems(selectedPokemon));
   }, [selectedPokemon]);
 
+  const goToHome = () => {
+    navigate("/");
+  };
+
   return (
     <nav className="bg-gray-800 fixed w-full top-0 left-0 z-50">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="relative flex items-center justify-between h-16">
           <div className="flex items-center flex-1 justify-between sm:justify-start">
-            <div className="flex-shrink-0 flex items-center">
+            <div className="flex-shrink-0 flex items-center cursor-pointer" onClick={() => goToHome()}>
               <img className="block h-8 w-auto" src="https://pokeapi.deno.dev/assets/logo/logo.webp" alt="Poke API" />
             </div>
             <div className="hidden sm:block sm:ml-6">
@@ -98,6 +104,6 @@ const PokeNavbar: FC = () => {
       {openSearch && <PokeSearch />}
     </nav>
   );
-}
+};
 
 export default PokeNavbar;
