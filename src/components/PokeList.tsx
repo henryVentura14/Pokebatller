@@ -6,11 +6,15 @@ import { useNavigate } from "react-router-dom";
 import PokeCard from "./PokeCard";
 import PokeDetailsDialog from "./PokeDetailsDialog";
 import PokeBattleDialog from "./PokeBattleDialog";
+import PokeBox from "./PokeBox";
+
+import { Trash } from "react-feather";
+
 
 const PokemonList: React.FC = () => {
   const navigate = useNavigate();
 
-  const { pokemonData, loading, error, selectedPokemon, addSelectedPokemon, removeSelectedPokemon } = usePokeContext();
+  const { pokemonData, loading, error, selectedPokemon, addSelectedPokemon, removeSelectedPokemon, generateRandomList, clearSelectedPokemon } = usePokeContext();
   const [detailsPokemon, setDetailsPokemon] = useState<PokeData | null>(null);
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [showBattleDialog, setShowBattleDialog] = useState<boolean>(false);
@@ -74,6 +78,24 @@ const PokemonList: React.FC = () => {
   return (
     <div className="bg-white py-16 sm:py-24 mt-12">
       <div className="mx-auto max-w-2xl px-4 sm:px-6 lg:max-w-7xl lg:px-8">
+        <header className="flex items-center justify-between mb-4 h-48">
+         <div>
+         {selectedPokemon.length > 0 && (
+
+            <PokeBox selectedPokemon={selectedPokemon} onRemove={removeSelectedPokemon} />
+          )}
+          </div>
+        
+          <div>
+            <button type="button" onClick={generateRandomList} className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded mr-4">
+              Generate Random List
+            </button>
+            <button type="button" onClick={clearSelectedPokemon} className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded">
+              Clear Selection
+            </button>
+          </div>
+        </header>
+
         <h2 className="text-2xl font-bold tracking-tight text-gray-900">Pokémon List</h2>
 
         <div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:gap-x-8">

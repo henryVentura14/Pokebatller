@@ -6,6 +6,8 @@ export interface PokeContextType {
   searchPokemon: (query: string) => void;
   addSelectedPokemon: (pokemon: PokeData) => void;
   removeSelectedPokemon: (pokemon: PokeData) => void;
+  generateRandomList: () => void;
+  clearSelectedPokemon: () => void;
 }
 
 export interface MenuItem {
