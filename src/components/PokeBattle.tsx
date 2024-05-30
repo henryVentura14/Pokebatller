@@ -44,7 +44,7 @@ const PokeBattle: React.FC = () => {
         <h2 className="text-2xl font-bold tracking-tight text-gray-900 mb-6">Pokémon Battle!</h2>
         <div className="grid grid-cols-1 sm:grid-cols-3 sm:gap-x-8 xl:gap-x-8">
           <div>
-            <h3 className="text-xl font-semibold mb-4">Your Pokémon</h3>
+            <h3 className="text-xl font-semibold mb-4 sm:block hidden">Your Pokémon</h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
               {selectedPokemon.map((pokemon, index) => (
                 <div key={index} className="flex flex-col items-center">
@@ -58,7 +58,7 @@ const PokeBattle: React.FC = () => {
             <img className="h-24 w-24 sm:h-48 sm:w-48" src="https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExaWV6MG50c3ppOHRpNm90YXY3NTluNzdnNmhxZnJsNWMwc25jOW9iZiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/fYwuzOT53K7K4XLIq4/giphy.gif" alt="versus" />
           </div>
           <div>
-            <h3 className="text-xl font-semibold mb-4">Opponent's Pokémon</h3>
+            <h3 className="text-xl font-semibold mb-4 sm:block hidden">Opponent's Pokémon</h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
               {opponentPokemon.map((pokemon, index) => (
                 <div key={index} className="flex flex-col items-center">
