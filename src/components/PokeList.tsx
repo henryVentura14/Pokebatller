@@ -101,7 +101,7 @@ const PokemonList: React.FC = () => {
               <button
                 type="button"
                 onClick={clearSelectedPokemon}
-                className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded"
+                className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded mt-2.5"
               >
                 Clear Selection
               </button>
@@ -110,7 +110,7 @@ const PokemonList: React.FC = () => {
               <button
                 type="button"
                 onClick={() => handleStartBattle()}
-                className="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded sm:hidden"
+                className="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded sm:hidden mt-2"
               >
                 Go to Battle
               </button>
